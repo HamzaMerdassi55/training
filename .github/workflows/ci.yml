@@ -57,17 +57,55 @@ jobs:
     
     runs-on: ubuntu-latest
         
-    needs: [job-1, job-2] # wait for job-1 to finsih after that begin with job-2 
+    needs: [job-1] # wait for job-1 to finsih after that begin with job-2 
             # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
               # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Clone Project 
         uses: actions/checkout@v3  
       # Runs a single comand using the runners shell
-      - name: Run script 2 
-        run: echo script -2 
+      - name: Run script 3 
+        run: echo script -3 
       # Runs a set of commands using the runners shell
-      - name: Run script 2 
+      - name: Run script 3 
         run: |
-          echo script 2.1 of job 2
-          echo script 2.2 of job 2 
+          echo script 3.1 of job 3
+          echo script 3.2 of job 3
+
+  job-4:
+    
+    runs-on: ubuntu-latest
+                
+    needs: [job-2] # wait for job-2 to finsih after that begin with job-2 
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Clone Project 
+        uses: actions/checkout@v3  
+              # Runs a single comand using the runners shell
+      - name: Run script 4 
+        run: echo script -4 
+              # Runs a set of commands using the runners shell
+      - name: Run script 4 
+        run: |
+          echo script 4.1 of job 4
+          echo script 4.2 of job 4 
+
+  job-5:
+    
+    runs-on: ubuntu-latest
+                        
+    needs: [job-3,job-4] # wait for job-2 to finsih after that begin with job-2 
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Clone Project 
+        uses: actions/checkout@v3  
+        # Runs a single comand using the runners shell
+      - name: Run script 5 
+        run: echo script -5 
+        # Runs a set of commands using the runners shell
+      - name: Run script 5 
+        run: |
+          echo script 5.1 of job 5
+          echo script 5.2 of job 5 
